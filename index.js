@@ -1,31 +1,16 @@
-import {promisify} from 'node:util';
 import path from 'node:path';
 import process from 'node:process';
 import {globby, globbySync} from 'globby';
 import isGlob from 'is-glob';
 import slash from 'slash';
-import gracefulFs from 'graceful-fs';
 import isPathCwd from 'is-path-cwd';
 import isPathInside from 'is-path-inside';
-import rimraf from 'rimraf';
+import {rimraf} from 'rimraf';
 import pMap from 'p-map';
 
-const rimrafP = promisify(rimraf);
 
 const rimrafOptions = {
-	glob: false,
-	unlink: gracefulFs.unlink,
-	unlinkSync: gracefulFs.unlinkSync,
-	chmod: gracefulFs.chmod,
-	chmodSync: gracefulFs.chmodSync,
-	stat: gracefulFs.stat,
-	statSync: gracefulFs.statSync,
-	lstat: gracefulFs.lstat,
-	lstatSync: gracefulFs.lstatSync,
-	rmdir: gracefulFs.rmdir,
-	rmdirSync: gracefulFs.rmdirSync,
-	readdir: gracefulFs.readdir,
-	readdirSync: gracefulFs.readdirSync,
+	glob: false
 };
 
 function safeCheck(file, cwd) {
